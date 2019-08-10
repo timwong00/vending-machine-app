@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 //import 'rxjs/add/operator/toPromise';
-//import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 
@@ -11,7 +10,7 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth) { }
 
-  doGoogleLogin(){
+  doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('profile');
@@ -27,7 +26,7 @@ export class AuthService {
     })
   }
 
-  doRegister(value){
+  doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {
@@ -36,7 +35,7 @@ export class AuthService {
     });
   }
 
-  doLogin(value){
+  doLogin(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(res => {
@@ -45,7 +44,7 @@ export class AuthService {
     });
   }
 
-  doLogout(){
+  doLogout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.afAuth.auth.signOut();
